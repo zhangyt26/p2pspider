@@ -1,6 +1,7 @@
 'use strict';
 
 var p2pspider = require('../lib/index');
+var guessit = require('guessit-wrapper');
 
 p2pspider(
     {
@@ -15,6 +16,9 @@ p2pspider(
         }
     },
     function(metadata) {
-        console.log(metadata);
+        var torrent_name = metadata.info['name'].toString('utf8');
+        guessit.parseName(torrent_name).then(function (data) {
+            console.log(data);
+        });
     }
 );
